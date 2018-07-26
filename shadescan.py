@@ -5,8 +5,7 @@ import os
 
 from scapy.all import sr1,IP
 
-# PROXY = os.getenv('PROXY_IP')
-PROXY = '213.186.32.53'
+PROXY = os.getenv('PROXY_IP')
 PROXY_PORT = os.getenv('PROXY_PORT')
 USER = os.getenv('MASQ_USER')
 PASS = os.getenv('MASQ_PW')
@@ -15,7 +14,7 @@ def connect_direct(host, port, exploit, proto='TCP'):
     rx_data = ""
     full_data = ""
     buff = 1024
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) if proto == 'TCP' else socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) if proto == 'TCP' else socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.connect((host, port))
     sock.sendall(exploit)
     while not len(rx_data) == 0:
